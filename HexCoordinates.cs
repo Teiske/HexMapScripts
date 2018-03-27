@@ -2,6 +2,7 @@
 
 [System.Serializable]
 public struct HexCoordinates {
+
     [SerializeField]
     private int x, z;
 
