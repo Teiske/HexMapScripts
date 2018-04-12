@@ -4,16 +4,37 @@ public class HexCell : MonoBehaviour {
 
 	public HexCoordinates coordinates;
 
-	public Color color;
+    Color color;
 
-	public RectTransform uiRect;
+    public Color Color {
+        get {
+            return color;
+        }
+        set {
+            if (color == value) {
+                return;
+            }
+            color = value;
+            Refresh();
+        }
+    }
 
-	public int Elevation {
+    public RectTransform uiRect;
+
+    public HexGridChunk chunk;
+
+    int elevation;
+
+    public int Elevation {
 		get {
 			return elevation;
 		}
 		set {
-			elevation = value;
+            if (elevation == value) {
+                return;
+            }
+
+			elevation = int.MinValue;
 			Vector3 position = transform.localPosition;
 			position.y = value * HexMetrics.elevationStep;
 			position.y += (HexMetrics.SampleNoise(position).y * 2f - 1f) * HexMetrics.elevationPerturbStrength;
@@ -22,16 +43,16 @@ public class HexCell : MonoBehaviour {
 			Vector3 uiPosition = uiRect.localPosition;
 			uiPosition.z = -position.y;
 			uiRect.localPosition = uiPosition;
+
+            Refresh();
 		}
 	}
 
-	public Vector3 Position {
+    public Vector3 Position {
 		get {
 			return transform.localPosition;
 		}
 	}
-
-	int elevation;
 
 	[SerializeField]
 	HexCell[] neighbors;
@@ -56,4 +77,16 @@ public class HexCell : MonoBehaviour {
 			elevation, otherCell.elevation
 		);
 	}
+
+    void Refresh() {
+        if (chunk) {
+            chunk.Refresh();
+            for (int i = 0; i < neighbors.Length; i++) {
+                HexCell neighbor = neighbors[i];
+                if (neighbor != null && neighbor.chunk != chunk) {
+                    neighbor.chunk.Refresh();
+                }
+            }
+        }
+    }
 }
