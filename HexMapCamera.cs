@@ -8,8 +8,7 @@ public class HexMapCamera : MonoBehaviour {
     float rotationAngle;
 
     public float stickMinZoom, stickMaxZoom;
-    public float swivelkMinZoom, swivelMaxZoom;
-    //public float moveSpeed;
+    public float swivelMinZoom, swivelMaxZoom;
     public float moveSpeedMinZoom, moveSpeedMaxZoom;
     public float rotationSpeed;
 
@@ -44,7 +43,7 @@ public class HexMapCamera : MonoBehaviour {
         float distance = Mathf.Lerp(stickMinZoom, stickMaxZoom, zoom);
         stick.localPosition = new Vector3(0f, 0f, distance);
 
-        float angle = Mathf.Lerp(swivelkMinZoom, swivelMaxZoom, zoom);
+        float angle = Mathf.Lerp(swivelMinZoom, swivelMaxZoom, zoom);
         swivel.localRotation = Quaternion.Euler(angle, 0f, 0f);
     }
 
