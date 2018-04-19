@@ -64,7 +64,43 @@ public class HexCell : MonoBehaviour {
 		}
 	}
 
-	public bool IsUnderwater {
+    public int UrbanLevel {
+        get {
+            return urbanLevel;
+        }
+        set {
+            if (urbanLevel != value) {
+                urbanLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
+
+    public int FarmLevel {
+        get {
+            return farmLevel;
+        }
+        set {
+            if (farmLevel != value) {
+                farmLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
+
+    public int PlantLevel {
+        get {
+            return plantLevel;
+        }
+        set {
+            if (plantLevel != value) {
+                plantLevel = value;
+                RefreshSelfOnly();
+            }
+        }
+    }
+
+    public bool IsUnderwater {
 		get {
 			return waterLevel > elevation;
 		}
@@ -152,6 +188,7 @@ public class HexCell : MonoBehaviour {
 
 	int elevation = int.MinValue;
 	int waterLevel;
+    int urbanLevel, farmLevel, plantLevel;
 
 	bool hasIncomingRiver, hasOutgoingRiver;
 	HexDirection incomingRiver, outgoingRiver;
