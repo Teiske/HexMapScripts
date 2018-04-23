@@ -130,6 +130,18 @@ public class HexCell : MonoBehaviour {
 		}
 	}
 
+    public bool Walled {
+        get {
+            return walled;
+        }
+        set {
+            if (walled != value) {
+                walled = value;
+                Refresh();
+            }
+        }
+    }
+
 	public HexDirection RiverBeginOrEndDirection {
 		get {
 			return hasIncomingRiver ? incomingRiver : outgoingRiver;
@@ -191,6 +203,7 @@ public class HexCell : MonoBehaviour {
     int urbanLevel, farmLevel, plantLevel;
 
 	bool hasIncomingRiver, hasOutgoingRiver;
+    bool walled;
 	HexDirection incomingRiver, outgoingRiver;
 
 	[SerializeField]
