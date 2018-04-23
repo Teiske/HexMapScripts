@@ -408,6 +408,8 @@ public class HexGridChunk : MonoBehaviour {
 			TriangulateEdgeStrip(e1, cell.Color, e2, neighbor.Color, cell.HasRoadThroughEdge(direction));
 		}
 
+        features.AddWall(e1, cell, e2, neighbor);
+
 		HexCell nextNeighbor = cell.GetNeighbor(direction.Next());
 		if (direction <= HexDirection.E && nextNeighbor != null) {
 			Vector3 v5 = e1.v5 + HexMetrics.GetBridge(direction.Next());

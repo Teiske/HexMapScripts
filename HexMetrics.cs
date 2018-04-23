@@ -23,6 +23,7 @@ public static class HexMetrics {
     public const float waterBlendFactor = 1f - waterFactor;
     public const int hashGridSize = 256;
     public const float hashGridScale = 0.25f;
+    public const float wallHeight = 3f;
 
     static Vector3[] corners = {
         new Vector3(0f, 0f, outerRadius),
